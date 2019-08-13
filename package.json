@@ -1,0 +1,40 @@
+{
+  "name": "form-actions",
+  "version": "0.0.0",
+  "description": "Extendable actions system for form.io servers",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint",
+    "start": "node lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formio/form-actions.git"
+  },
+  "keywords": [
+    "formio",
+    "forms",
+    "actions"
+  ],
+  "author": "Randall Knutson <randall@form.io>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/formio/form-actions/issues"
+  },
+  "homepage": "https://github.com/formio/form-actions#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^5.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.7.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  }
+}
