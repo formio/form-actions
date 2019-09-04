@@ -52,7 +52,8 @@ export class Example1 extends Action {
   /**
    * The main function that executes the action. You can access the settings with this.settings.
    */
-  resolve() {
-    return Promise.resolve();
+  async resolve(context) {
+    console.log('resolve');
+    return 'test';
   }
 };

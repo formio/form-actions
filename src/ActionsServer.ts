@@ -1,5 +1,6 @@
-import { Express } from 'express';
+import { Express, Request, Response } from 'express';
 import { Config } from './config';
+import { Action } from './actions/Action';
 import actions from './actions';
 
 export class ActionsServer {
@@ -34,10 +35,11 @@ export class ActionsServer {
     // Add action specific endpoints.
     for (const name in this.actions) {
       const action = this.actions[name];
+
+      // If action has a defined url, assume it already is listening somewhere.
       if (!action.url) {
-        console.log('registering', action.method, `/actions/${name}`);
-        this.router[action.method.toLowerCase()](`/actions/${name}`, action.resolve.bind(action));
-        this.actions[name] = new actions[name](this.config)
+        this.actions[name] = new actions[name](this.config);
+        this.router[action.method.toLowerCase()](`/actions/${name}`, this.resolve.bind(null, this.actions[name]));
       }
     }
 
@@ -52,15 +54,15 @@ export class ActionsServer {
 
   authenticate(req, res, next) {
     if (
-      req.headers.hasOwnProperty('authentication') &&
-      req.headers.authentication === `Bearer: ${this.config.key}`
+      req.headers.hasOwnProperty('authorization') &&
+      req.headers.authorization === `Bearer: ${this.config.key}`
     ) {
       return next();
     }
     return res.status(401).send('Unauthorized');
   }
 
-  get actionsList() {
+  get actionsList(): any {
     const actionInfo: any = {};
 
     for (const name in this.actions) {
@@ -88,5 +90,15 @@ export class ActionsServer {
 
   actionsIndex(req, res) {
     res.send(this.actionsList);
+  }
+
+  async resolve(action: Action, req: Request, res: Response) {
+    try {
+      const result = await action.resolve(req.body);
+      res.status(200).send(result);
+    }
+    catch (err) {
+      res.status(400).send(err);
+    }
   }
 }
