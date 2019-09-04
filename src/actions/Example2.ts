@@ -1,13 +1,13 @@
-import Action from './Action';
+import { Action } from './Action';
 
-export default class Example extends Action {
+export class Example2 extends Action {
   /**
    * Info returns the information about the action such as its name, running information and default settings. This
    * informs the action lists about what information to show about the action so it can be added to a form.
    *
    * @returns actionInfo
    */
-  static info() {
+  info() {
     return {
       name: 'example2',
       title: 'Example2',
@@ -37,7 +37,7 @@ export default class Example extends Action {
    * @param options
    * @returns {*}
    */
-  static settingsForm() {
+  settingsForm() {
     return [
       {
         type: 'textfield',

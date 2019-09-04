@@ -1,14 +1,12 @@
 {
-  "name": "form-actions",
+  "name": "@formio/actions",
   "version": "0.0.0",
   "description": "Extendable actions system for form.io servers",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "watch": "tsc -w",
-    "lint": "tslint",
-    "start": "node lib/index.js"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "lint": "tslint --project '.'",
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -34,7 +32,13 @@
   "devDependencies": {
     "@types/express": "^4.17.0",
     "@types/node": "^12.7.0",
+    "pre-commit": "^1.2.2",
+    "ts-loader": "^6.0.4",
+    "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }

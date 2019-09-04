@@ -1,4 +1,4 @@
-export default class Action {
+export class Action {
   private settings: any;
 
   /**
@@ -7,7 +7,7 @@ export default class Action {
    *
    * @returns actionInfo
    */
-  static info() {
+  info() {
     return {};
   }
 
@@ -17,21 +17,21 @@ export default class Action {
    *
    * @returns [components]
    */
-  static settingsForm() {
+  settingsForm() {
     return [];
   }
 
   /**
    * Type of request to make when calling this action.
    */
-  static get method() {
+  get method() {
     return 'POST';
   }
 
   /**
    * URL of the request. If this returns false it will use the default url for this server action.
    */
-  static get url() {
+  get url() {
     return false;
   }
 
